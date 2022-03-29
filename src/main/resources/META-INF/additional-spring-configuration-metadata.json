@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "db_driver",
+      "type": "java.lang.String",
+      "description": "Description for db_driver."
+    },
+    {
+      "name": "db_url",
+      "type": "java.lang.String",
+      "description": "Description for db_url."
+    },
+    {
+      "name": "db_username",
+      "type": "java.lang.String",
+      "description": "Description for db_username."
+    },
+    {
+      "name": "db_password",
+      "type": "java.lang.String",
+      "description": "Description for db_password."
+    },
+    {
+      "name": "db_schema",
+      "type": "java.lang.String",
+      "description": "Description for db_schema."
+    }
+  ] }
