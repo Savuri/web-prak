@@ -21,8 +21,8 @@ public class HibernateDatabaseConfig {
     private String db_username;
     @Value("${db_password}")
     private String db_password;
-    @Value("${db_schema}")
-    private String db_schema;
+//    @Value("${db_schema}")
+//    private String db_schema;
     @Value("${db_driver}")
     private String db_driver;
 
@@ -43,7 +43,8 @@ public class HibernateDatabaseConfig {
         dataSource.setUrl(db_url);
         dataSource.setUsername(db_username);
         dataSource.setPassword(db_password);
-        dataSource.setSchema(db_schema);
+//        dataSource.setSchema(db_schema);
+//        System.err.println(dataSource.getSchema()); // TODO schema creation(?)
 
         return dataSource;
     }

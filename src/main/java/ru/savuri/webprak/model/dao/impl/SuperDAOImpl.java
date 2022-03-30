@@ -21,7 +21,7 @@ abstract class SuperDAOImpl<Entity extends SuperEntity<ID>, ID extends Number> i
 
     protected Class<Entity> persistentClass;
 
-    public SuperDAOImpl(Class<Entity> entityClass){
+    public SuperDAOImpl(Class<Entity> entityClass) {
         this.persistentClass = entityClass;
     }
 
@@ -32,7 +32,7 @@ abstract class SuperDAOImpl<Entity extends SuperEntity<ID>, ID extends Number> i
 
     @Override
     public Entity getById(ID id) {
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             return session.get(persistentClass, id);
         }
     }
@@ -57,6 +57,14 @@ abstract class SuperDAOImpl<Entity extends SuperEntity<ID>, ID extends Number> i
             session.getTransaction().commit();
         }
     }
+
+    @Override
+    public void saveCollection(Collection<Entity> collection) {
+        for (Entity entity : collection) {
+            save(entity);
+        }
+    }
+
 
     @Override
     public void update(Entity entity) {

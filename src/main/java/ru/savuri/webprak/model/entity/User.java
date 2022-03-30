@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 @Getter
 @Setter
 @ToString
@@ -21,7 +21,7 @@ public class User implements SuperEntity<Long> {
     @GeneratedValue
     private Long id = null;
 
-    @OneToMany(mappedBy = "User", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @NonNull
     @ToString.Exclude
     @OnDelete(action = OnDeleteAction.CASCADE)

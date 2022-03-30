@@ -2,12 +2,15 @@ package ru.savuri.webprak.model.entity;
 
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Good")
+@Table(name = "goods")
 @Getter
 @Setter
 @ToString
@@ -19,9 +22,10 @@ public class Good implements SuperEntity<Long> {
     @GeneratedValue
     private Long id = null;
 
-    @OneToMany(mappedBy = "Good", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "good", fetch = FetchType.EAGER)
     @NonNull
     @ToString.Exclude
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<OrderGood> orderGoods;
 
     @Column(nullable = false, name = "model", length = 100)

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Order")
+@Table(name = "orders")
 @Getter
 @Setter
 @ToString
@@ -20,7 +20,7 @@ public class Order implements SuperEntity<Long> {
     @GeneratedValue
     private Long id = null;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "Order")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
     @ToString.Exclude
     @NonNull
     private Set<OrderGood> orderGoods;
