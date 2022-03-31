@@ -11,6 +11,10 @@ public interface SuperDAO<Entity extends SuperEntity<ID>, ID extends Number> {
     void update(Entity entity);
     void delete(Entity entity);
     Entity getById(ID id);
+
+    /*
+    asc sorted by id
+     */
     List<Entity> getAll();
     String getSearchPattern(String searchString);
 }
