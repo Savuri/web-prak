@@ -39,7 +39,7 @@ public class OrderGood implements SuperEntity<Long>  {
 
     @Column(nullable = false, name = "purchase_price")
     @NonNull
-    Integer purchasePrice;
+    Integer purchasePrice; // in $
 
     @Override
     public boolean equals(Object o) {

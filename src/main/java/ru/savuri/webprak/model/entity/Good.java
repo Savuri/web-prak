@@ -23,7 +23,6 @@ public class Good implements SuperEntity<Long> {
     private Long id = null;
 
     @OneToMany(mappedBy = "good", fetch = FetchType.EAGER)
-    @NonNull
     @ToString.Exclude
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<OrderGood> orderGoods;
@@ -58,9 +57,16 @@ public class Good implements SuperEntity<Long> {
     private String description;
 
     //TODO
+    @AllArgsConstructor
+    @Getter
     public enum GoodType {
-        PLACEHOLDER1,
-        PLACEHOLDER2
+        KITCHEN("Кухонная техника"),
+        BATHROOM("Техника для ванной"),
+        TV("Телевизор"),
+        COMPUTER("Компьютер"),
+        OTHER("Другое");
+
+        private final String type;
     }
 
     @Override

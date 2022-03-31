@@ -22,7 +22,6 @@ public class User implements SuperEntity<Long> {
     private Long id = null;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @NonNull
     @ToString.Exclude
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Order> orders;
