@@ -16,16 +16,12 @@ import java.util.List;
 @Repository
 public class GoodDAOImpl extends SuperDAOImpl<Good, Long> implements GoodDAO {
 
-    public GoodDAOImpl() {
-        super(Good.class);
-    }
-
     @Override
-    public List<User> getByFilter(GoodFilter filter) {
+    public List<Good> getByFilter(GoodFilter filter) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-            Root<User> root = criteriaQuery.from(User.class);
+            CriteriaQuery<Good> criteriaQuery = criteriaBuilder.createQuery(Good.class);
+            Root<Good> root = criteriaQuery.from(Good.class);
 
             List<Predicate> predicates = new ArrayList<>();
             if (filter.getType() != null) predicates.add(criteriaBuilder.equal(root.get("type"), filter.getType()));
@@ -34,6 +30,7 @@ public class GoodDAOImpl extends SuperDAOImpl<Good, Long> implements GoodDAO {
 
             if (predicates.size() != 0) {
                 criteriaQuery.where(predicates.toArray(new Predicate[0]));
+                criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
             }
 
             return session.createQuery(criteriaQuery).getResultList();

@@ -5,7 +5,4 @@ import ru.savuri.webprak.model.entity.OrderGood;
 
 @Repository
 public class OrderGoodDAOImpl extends SuperDAOImpl<OrderGood, Long> implements OrderGoodDAO {
-    public OrderGoodDAOImpl() {
-        super(OrderGood.class);
-    }
 }

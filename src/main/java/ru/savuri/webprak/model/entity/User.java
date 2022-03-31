@@ -47,8 +47,7 @@ public class User implements SuperEntity<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User other = (User) o;
-        return Objects.equals(id, other.id) && fullName.equals(other.fullName)  && email.equals(other.address) &&
-                phoneNumber.equals(other.phoneNumber) && address.equals(other.address);
+        return Objects.equals(id, other.id) && fullName.equals(other.fullName)  && email.equals(other.email) && phoneNumber.equals(other.phoneNumber) && address.equals(other.address);
     }
 
     @Override

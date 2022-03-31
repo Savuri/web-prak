@@ -16,10 +16,6 @@ import java.util.List;
 
 @Repository
 public class UserDAOImpl extends SuperDAOImpl<User, Long> implements UserDAO {
-    public UserDAOImpl() {
-        super(User.class);
-    }
-
     @Override
     public List<User> getByFullName(String fullName) {
         try (Session session = sessionFactory.openSession()) {
@@ -27,7 +23,7 @@ public class UserDAOImpl extends SuperDAOImpl<User, Long> implements UserDAO {
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> root = criteriaQuery.from(User.class);
 
-            Predicate predicate = criteriaBuilder.like(root.get("full_name"), getSearchPattern(fullName));
+            Predicate predicate = criteriaBuilder.equal(root.get("fullName"), fullName);
 
             criteriaQuery.where(predicate);
 
@@ -36,9 +32,10 @@ public class UserDAOImpl extends SuperDAOImpl<User, Long> implements UserDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Order> getOrders(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return (List<Order>) session.createQuery("select u.orders from User u where u.id = :id").setParameter("id", id);
+            return session.createQuery("select u.orders from User u where u.id = :id order by u.id").setParameter("id", id).getResultList();
         }
     }
 

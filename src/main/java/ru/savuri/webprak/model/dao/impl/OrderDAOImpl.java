@@ -12,9 +12,4 @@ import java.util.List;
 @Repository
 public class OrderDAOImpl extends SuperDAOImpl<Order, Long> implements OrderDAO {
 
-    public OrderDAOImpl() {
-        super(Order.class);
-    }
-
-
 }

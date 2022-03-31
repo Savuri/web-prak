@@ -50,6 +50,7 @@ public class HibernateDatabaseConfig {
     }
 
     private Properties hibernateProperties() {
+        System.out.println("HERE");
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty(
                 "hibernate.hbm2ddl.auto", "update");

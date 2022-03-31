@@ -1,5 +1,6 @@
 package ru.savuri.webprak.model.dao.impl;
 
+import net.jodah.typetools.TypeResolver;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.bytecode.enhance.internal.bytebuddy.EnhancerImpl;
@@ -8,22 +9,24 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import ru.savuri.webprak.model.dao.SuperDAO;
 import ru.savuri.webprak.model.entity.SuperEntity;
+import ru.savuri.webprak.model.entity.User;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Repository
 abstract class SuperDAOImpl<Entity extends SuperEntity<ID>, ID extends Number> implements SuperDAO<Entity, ID> {
     protected SessionFactory sessionFactory;
 
-    protected Class<Entity> persistentClass;
-
-    public SuperDAOImpl(Class<Entity> entityClass) {
-        this.persistentClass = entityClass;
-    }
+    @SuppressWarnings("unchecked")
+    private final Class<Entity> persistentClass = (Class<Entity>) ((Class<?>[]) TypeResolver.resolveRawArguments(SuperDAO.class, getClass()))[0];
 
     @Autowired
     public void setSessionFactory(LocalSessionFactoryBean sessionFactory) {
@@ -40,9 +43,13 @@ abstract class SuperDAOImpl<Entity extends SuperEntity<ID>, ID extends Number> i
     @Override
     public List<Entity> getAll() {
         try (Session session = sessionFactory.openSession()) {
-            CriteriaQuery<Entity> criteriaQuery = session.getCriteriaBuilder().createQuery(persistentClass);
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Entity> criteriaQuery = criteriaBuilder.createQuery(persistentClass);
             criteriaQuery.from(persistentClass);
-            return session.createQuery(criteriaQuery).getResultList();
+
+            List<Entity> res = session.createQuery(criteriaQuery).getResultList();
+            res.sort((Entity e1, Entity e2)-> (int) (e1.getId() - e2.getId()));
+            return res;
         }
     }
 
