@@ -71,6 +71,8 @@ public class GoodController {
             return "errorPage";
         }
 
+        System.err.println(description);
+
 
         if (goodId == null) {
             // create
@@ -88,6 +90,8 @@ public class GoodController {
             good.setManufacturer(manufacturer);
             good.setAssemblyPlace(assemblyPlace);
             good.setDescription(description);
+
+            goodDAO.update(good);
 
             return String.format("redirect:/goodInfo?goodId=%d", good.getId());
         }
