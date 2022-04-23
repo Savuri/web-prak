@@ -11,7 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 
 
 @SpringBootTest
-@TestPropertySource(locations="classpath:application.properties")
+@TestPropertySource(locations= "classpath:application.properties")
 class HibernateDatabaseConfigTest {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;

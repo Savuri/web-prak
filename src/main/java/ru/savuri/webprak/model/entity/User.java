@@ -30,7 +30,7 @@ public class User implements SuperEntity<Long> {
     @NonNull
     private String fullName;
 
-    @Column(nullable = false, name = "phine_number", length = 20)
+    @Column(nullable = false, name = "phone_number", length = 20)
     @NonNull
     private String phoneNumber;
 
