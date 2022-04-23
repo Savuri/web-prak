@@ -1,6 +1,6 @@
 \connect web_db;
 
-truncate goods;
-truncate ordergoods;
-truncate users;
-truncate orders;
+truncate ordergoods cascade;
+truncate goods cascade;
+truncate users cascade;
+truncate orders cascade;
