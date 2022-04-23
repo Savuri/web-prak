@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <link hidden="" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+<div th:replace="lib :: body-header"></div>
+
+<main class="content">
+    <h2 th:if="${isEditGood}"> Edit this good.</h2>
+    <h2 th:if="${!isEditGood}">Create new good.</h2>
+
+    <form>
+        <div class="mb-3">
+            <label for="assemblyPlaceInput" class="form-label">Assembly place</label>
+            <input type="text" class="form-control" id="assemblyPlaceInput" th:value="${good?.getAssemblyPlace()}">
+        </div>
+        <div class="mb-3">
+            <label for="manufacturerInput" class="form-label">Manufacturer</label>
+            <input type="text" class="form-control" id="manufacturerInput" th:value="${good?.getManufacturer()}">
+        </div>
+        <div class="mb-3">
+            <label for="modelInput" class="form-label">Model</label>
+            <input type="text" class="form-control" id="modelInput" th:value="${good?.getModel()}">
+        </div>
+        <div class="mb-3">
+            <label for="priceInput" class="form-label">Price</label>
+            <input type="number" min="0" class="form-control" id="priceInput" th:value="${good?.getPrice()}">
+        </div>
+        <div class="mb-3">
+            <label for="quantityInput" class="form-label">Quantity</label>
+            <input type="number" min="0" class="form-control" id="quantityInput" th:value="${good?.getQuantity()}">
+        </div>
+        Type:
+        <div class="mb-3" style="">
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput1" th:checked="${good?.getType()?.getName()} == Kitchen">
+            <label for="typeInput1" class="form-label">Kitchen</label>
+            <br>
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput2" th:checked="${good?.getType()?.getName()} == 'Bathroom'">
+            <label for="typeInput2">Bathroom</label>
+            <br>
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput3" th:checked="${good?.getType()?.getName()} == 'TV'">
+            <label for="typeInput3">TV</label>
+            <br>
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput4" th:checked="${good?.getType()?.getName()} == 'Computer'">
+            <label for="typeInput4">Computer</label>
+            <br>
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput5" th:checked="${good?.getType()?.getName()} == 'Other'">
+            <label for="typeInput5">Other</label>
+        </div>
+        <div>
+            <label for="inputDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="inputDescription" style="height: 419px" th:text="${good?.getDescription()}"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg">Cancel</button>
+        <button type="button" class="btn btn-primary btn-lg">Save</button>
+    </form>
+</main>
+
+
+<div th:replace="lib :: bs-site-script"></div>
 
 </body>
 </html>

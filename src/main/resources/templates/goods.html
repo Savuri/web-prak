@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Goods</title>
 </head>
 <body>
-    <div th:replace="lib :: body-header"></div>
+<div th:replace="lib :: body-header"></div>
 
-    <main class="content">
-    </main>
+<main class="content">
+    <h2>List of goods:</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Model</th>
+            <th scope="col">Type</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity in stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="good : ${goodList}">
+            <th scope="row"></th>
+            <td><a th:href="@{/goodInfo(goodId=${good.getId()})}"><span th:text="${good.getModel()}"></span></a></td>
+            <td th:text="${good.getType().getName()}"></td>
+            <td th:text="${good.getManufacturer()}"></td>
+            <td th:text="${good.getPrice()}"></td>
+            <td th:text="${good.getQuantity()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{goodEdit}">
+        <button type="button" class="btn btn-primary btn-lg">Create good</button>
+    </a>
+</main>
 
 
-    <div th:replace="lib :: bs-site-script"></div>
+<div th:replace="lib :: bs-site-script"></div>
 </body>
 </html>
