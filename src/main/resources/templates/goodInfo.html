@@ -25,8 +25,12 @@
         <textarea class="form-control" id="readOnlyDescription" style="height: 200px" th:text="${thisGood.getDescription()}" readonly></textarea>
     </div>
     <br>
+    <form style="display: inline" method="post" action="/goodDelete">
+        <input type="hidden" name="goodId" th:value="${thisGood.getId()}"/>
+        <button type="submit" class="btn btn-primary btn-lg">Delete good</button>
+    </form>
     <a th:href="@{/goodEdit(goodId=${thisGood.getId()})}">
-        <button type="button" class="btn btn-primary btn-lg">Create good</button>
+        <button type="button" class="btn btn-primary btn-lg">Edit good</button>
     </a>
 </main>
 
