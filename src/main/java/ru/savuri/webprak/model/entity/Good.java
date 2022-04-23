@@ -56,17 +56,16 @@ public class Good implements SuperEntity<Long> {
     @NonNull
     private String description;
 
-    //TODO
     @AllArgsConstructor
     @Getter
     public enum GoodType {
-        KITCHEN("Кухонная техника"),
-        BATHROOM("Техника для ванной"),
-        TV("Телевизор"),
-        COMPUTER("Компьютер"),
-        OTHER("Другое");
+        KITCHEN("Kitchen"),
+        BATHROOM("Bathroom"),
+        TV("TV"),
+        COMPUTER("Computer"),
+        OTHER("Other");
 
-        private final String type;
+        private final String name;
     }
 
     @Override
