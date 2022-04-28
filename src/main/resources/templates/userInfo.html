@@ -9,9 +9,24 @@
     <div th:replace="lib :: body-header"></div>
 
     <main class="content">
+        <div style="font-size : 20px">
+            <span th:text="'Full name: ' + ${thisUser.getFullName()}"></span>
+            <br>
+            <span th:text="'Phone number: ' + ${thisUser.getPhoneNumber()}"></span>
+            <br>
+            <span th:text="'Address: ' + ${thisUser.getAddress()}"></span>
+            <br>
+            <span th:text="'Email: ' + ${thisUser.getEmail()}"></span>
+        </div>
+        <br>
+        <form style="display: inline" method="post" action="/userDelete">
+            <input type="hidden" name="userId" th:value="${thisUser.getId()}"/>
+            <button type="submit" class="btn btn-primary btn-lg">Delete user</button>
+        </form>
+        <a th:href="@{/userEdit(userId=${thisUser.getId()})}">
+            <button type="button" class="btn btn-primary btn-lg">Edit user</button>
+        </a>
     </main>
-
-
     <div th:replace="lib :: bs-site-script"></div>
 </body>
 </html>

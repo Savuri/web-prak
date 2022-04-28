@@ -9,7 +9,32 @@
     <div th:replace="lib :: body-header"></div>
 
     <main class="content">
+        <h2 th:if="${isEditUser}"> Edit this user.</h2>
+        <h2 th:if="${!isEditUser}">Create new user.</h2>
+
+        <form method="post" th:action="userSave">
+            <input type="hidden" name="userId" th:value="${thisUser?.getId()}"/>
+            <div class="mb-3">
+                <label for="fullNameInput" class="form-label">Full Name</label>
+                <input name="fullName" type="text" class="form-control" id="fullNameInput" th:value="${thisUser?.getFullName()}">
+            </div>
+            <div class="mb-3">
+                <label for="phoneNumberInput" class="form-label">Phone number</label>
+                <input name="phoneNumber" type="tel" class="form-control" id="phoneNumberInput" th:value="${thisUser?.getPhoneNumber()}">
+            </div>
+            <div class="mb-3">
+                <label for="addressInput" class="form-label">Address</label>
+                <input name="address" type="text" class="form-control" id="addressInput" th:value="${thisUser?.getAddress()}">
+            </div>
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Email</label>
+                <input name="email" type="email" min="0" class="form-control" id="emailInput" th:value="${thisUser?.getEmail()}">
+            </div>
+            <a th:href="@{users}"><button type="button" class="btn btn-primary btn-lg">Cancel</button></a>
+            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+        </form>
     </main>
+
 
 
     <div th:replace="lib :: bs-site-script"></div>

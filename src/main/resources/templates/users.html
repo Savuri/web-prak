@@ -9,8 +9,33 @@
     <div th:replace="lib :: body-header"></div>
 
     <main class="content">
+
         <h2>List of users:</h2>
 
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">full name</th>
+                <th scope="col">phone number</th>
+                <th scope="col">address</th>
+                <th scope="col">email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <th scope="row"></th>
+                <td><a th:href="@{/userInfo(userId=${user.getId()})}"><span th:text="${user.getFullName()}"></span></a></td>
+                <td th:text="${user.getPhoneNumber()}"></td>
+                <td th:text="${user.getAddress()}"></td>
+                <td th:text="${user.getEmail()}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{userEdit}">
+            <button type="button" class="btn btn-primary btn-lg">Create user</button>
+        </a>
     </main>
 
 

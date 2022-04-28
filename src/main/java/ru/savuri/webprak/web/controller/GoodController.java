@@ -30,9 +30,7 @@ public class GoodController {
     @GetMapping("/goods")
     public String goods(Model model) {
         List<Good> goodList = goodDAO.getAll();
-        if (!model.containsAttribute("goodList")) {
-            model.addAttribute("goodList", goodList);
-        }
+        model.addAttribute("goodList", goodList);
         return "goods";
     }
 
@@ -69,15 +67,6 @@ public class GoodController {
                            @RequestParam(name = "typeInput") Good.GoodType typeInput,
                            @RequestParam(name = "description") String description,
                            Model prjModel) {
-        if (assemblyPlace == null || manufacturer == null || model == null || price == null
-                || quantity == null || typeInput == null || description == null) {
-            prjModel.addAttribute("errMsg", "One field of form was not field");
-            return "errorPage";
-        }
-
-        System.err.println(description);
-
-
         if (goodId == null) {
             // create
             Good good = new Good(model, typeInput, price, quantity, manufacturer, assemblyPlace, description);
