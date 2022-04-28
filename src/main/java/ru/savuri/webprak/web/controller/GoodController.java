@@ -1,5 +1,6 @@
 package ru.savuri.webprak.web.controller;
 
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import ru.savuri.webprak.model.dao.impl.GoodDAOImpl;
 import ru.savuri.webprak.model.entity.Good;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class GoodController {
@@ -28,7 +30,9 @@ public class GoodController {
     @GetMapping("/goods")
     public String goods(Model model) {
         List<Good> goodList = goodDAO.getAll();
-        model.addAttribute("goodList", goodList);
+        if (!model.containsAttribute("goodList")) {
+            model.addAttribute("goodList", goodList);
+        }
         return "goods";
     }
 
@@ -102,5 +106,29 @@ public class GoodController {
         goodDAO.delete(goodDAO.getById(goodId));
 
         return "redirect:/goods";
+    }
+
+    @PostMapping("/goodSearch")
+    public String goodSearch(@RequestParam(name = "typeInput", required = false) String type,
+                             @RequestParam(name = "description", required = false) String description,
+                             @RequestParam(name = "manufacturer", required = false) String manufacturer,
+                             @NonNull Model model) {
+        Good.GoodType typeInput = null;
+        if (!Objects.equals(type, "")) {
+            type = type.substring(0, type.length() - 1);
+            typeInput = Good.GoodType.valueOf(type);
+        }
+
+
+        List<Good> goodList = goodDAO.getByFilter(GoodDAO.GoodFilter.builder()
+                .manufacturer(manufacturer)
+                .description(description)
+                .type(typeInput)
+                .build());
+
+
+        model.addAttribute("goodList", goodList);
+
+        return "/goods";
     }
 }

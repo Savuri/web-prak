@@ -15,16 +15,16 @@
     <form method="post" th:action="goodSave">
         <input type="hidden" name="goodId" th:value="${good?.getId()}"/>
         <div class="mb-3">
-            <label for="assemblyPlace" class="form-label">Assembly place</label>
-            <input name="assemblyPlace" type="text" class="form-control" id="assemblyPlace" th:value="${good?.getAssemblyPlace()}">
+            <label for="modelInput" class="form-label">Model</label>
+            <input name="model" type="text" class="form-control" id="modelInput" th:value="${good?.getModel()}">
         </div>
         <div class="mb-3">
             <label for="manufacturerInput" class="form-label">Manufacturer</label>
             <input name="manufacturer" type="text" class="form-control" id="manufacturerInput" th:value="${good?.getManufacturer()}">
         </div>
         <div class="mb-3">
-            <label for="modelInput" class="form-label">Model</label>
-            <input name="model" type="text" class="form-control" id="modelInput" th:value="${good?.getModel()}">
+            <label for="assemblyPlace" class="form-label">Assembly place</label>
+            <input name="assemblyPlace" type="text" class="form-control" id="assemblyPlace" th:value="${good?.getAssemblyPlace()}">
         </div>
         <div class="mb-3">
             <label for="priceInput" class="form-label">Price</label>

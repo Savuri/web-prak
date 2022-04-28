@@ -10,6 +10,39 @@
 <div th:replace="lib :: body-header"></div>
 
 <main class="content">
+    <form method="post" th:action="goodSearch">
+        Search:
+        <div class="input-group">
+            <div class="mb-3" style="">
+                <input type="radio" class="form-check-input" name="typeInput" id="typeInput1" value="KITCHEN">
+                <label for="typeInput1" class="form-label">Kitchen</label>
+                <br>
+                <input type="radio" class="form-check-input" name="typeInput" id="typeInput2" value="BATHROOM">
+                <label for="typeInput2">Bathroom</label>
+                <br>
+                <input type="radio" class="form-check-input" name="typeInput" id="typeInput3" value="TV">
+                <label for="typeInput3">TV</label>
+                <br>
+                <input type="radio" class="form-check-input" name="typeInput" id="typeInput4" value="COMPUTER">
+                <label for="typeInput4">Computer</label>
+                <br>
+                <input type="radio" class="form-check-input" name="typeInput" id="typeInput5" value="OTHER">
+                <label for="typeInput5">Other</label>
+                <br>
+                <input type="hidden" class="form-check-input" name="typeInput" id="typeInput6" value="">
+            </div>
+            <div class="mb-3">
+                <label for="manufacturerInput" class="form-label">Manufacturer</label>
+                <input name="manufacturer" type="text" style="height: 125px" class="form-control" id="manufacturerInput">
+            </div>
+            <div>
+                <label for="inputDescription" class="form-label">Description</label>
+                <textarea name="description" class="form-control" id="inputDescription" style="width : 2000px; height: 125px; resize: none"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Search</button>
+    </form>
+
     <h2>List of goods:</h2>
 
     <table class="table">
