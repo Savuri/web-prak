@@ -10,6 +10,8 @@
 
     <main class="content">
         <div style="font-size : 20px">
+            <span th:text="'User id: ' + ${thisUser.getId()}"></span>
+            <br>
             <span th:text="'Full name: ' + ${thisUser.getFullName()}"></span>
             <br>
             <span th:text="'Phone number: ' + ${thisUser.getPhoneNumber()}"></span>

@@ -1,6 +1,7 @@
 package ru.savuri.webprak.model.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,13 +22,13 @@ public class OrderGood implements SuperEntity<Long>  {
     @GeneratedValue
     private Long id = null;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "order_id")
     @ToString.Exclude
     @NonNull
     private Order order;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "good_id")
     @ToString.Exclude
     @NonNull

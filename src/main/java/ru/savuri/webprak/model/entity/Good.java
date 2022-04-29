@@ -22,7 +22,7 @@ public class Good implements SuperEntity<Long> {
     @GeneratedValue
     private Long id = null;
 
-    @OneToMany(mappedBy = "good", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "good", fetch = FetchType.EAGER)
     @ToString.Exclude
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<OrderGood> orderGoods;
