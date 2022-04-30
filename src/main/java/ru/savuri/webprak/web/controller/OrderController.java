@@ -126,8 +126,8 @@ public class OrderController {
 
         orderDAO.save(order);
 
-        for (int i = 0; i < goodList.size(); ++i) {
-            goodDAO.update(goodList.get(i));
+        for (Good good : goodList) {
+            goodDAO.update(good);
         }
         return String.format("redirect:/orderInfo?orderId=%d", order.getId());
     }
@@ -136,12 +136,11 @@ public class OrderController {
     public String orderDelete(@RequestParam(name = "orderId") Long orderId) {
         orderDAO.delete(orderDAO.getById(orderId));
 
-
         return "redirect:/orders";
     }
 
     @PostMapping("orderSearch")
-    public String orderSearch(@RequestParam(name = "userId") Long userId, Model model) {
+    public String orderSearch(@RequestParam(name = "userId", required = false) Long userId, Model model) {
         List<Order> orderList = userDAO.getOrders(userId);
         model.addAttribute("orderList", orderList);
 
