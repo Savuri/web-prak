@@ -19,7 +19,6 @@ import ru.savuri.webprak.model.entity.Order;
 import ru.savuri.webprak.model.entity.OrderGood;
 import ru.savuri.webprak.model.entity.User;
 
-import javax.swing.text.html.parser.Entity;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -46,25 +45,58 @@ public class SeleniumTests {
     @Autowired
     private OrderGoodDAO orderGoodDAO;
 
-    void testGoods() {
+    void testGoodsContent() {
 
     }
 
-    void testGoodsEdit() {
+    void testGoodCreate() {
 
     }
 
-    void testGoodsInfo() {
+    void testGoodEdit() {
+
+    }
+
+    void testGoodDelete() {
+
+    }
+
+
+    void testOrdersContent() {
+
+    }
+
+    void testOrderCreate() {
+
+    }
+
+    void testOrderDelete() {
+
+    }
+
+    void testUserContent() {
+
+    }
+
+    void testUserCreate() {
+
+    }
+
+    void testUserDelete() {
+
+    }
+
+    void testUserEdit() {
 
     }
 
 
     @BeforeEach
     public void setUp() {
-        List<Good> goodList = new ArrayList<Good>();
-        List<User> userList = new ArrayList<User>();
-        List<Order> orderList = new ArrayList<Order>();
-        List<OrderGood> orderGoodList = new ArrayList<OrderGood>();
+        List<Good> goodList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
+        List<OrderGood> orderGoodList = new ArrayList<>();
 
         goodList.add(new Good("GA-B379SQUL", Good.GoodType.KITCHEN, 46687, 2, "LG", "Китай", "ШхВхГ	59.50х173.70х65.50 с\n" +
                 "Общий объем\t261 л\n" +
@@ -136,9 +168,8 @@ public class SeleniumTests {
         }
     }
 
-    @BeforeAll
     @AfterEach
-    public void clean() {
+    void clean() {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.createSQLQuery("TRUNCATE users RESTART IDENTITY CASCADE;").executeUpdate();
