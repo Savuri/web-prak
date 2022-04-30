@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.model.IModel;
 import ru.savuri.webprak.model.dao.*;
 import ru.savuri.webprak.model.entity.Good;
 import ru.savuri.webprak.model.entity.Order;
@@ -137,5 +138,13 @@ public class OrderController {
 
 
         return "redirect:/orders";
+    }
+
+    @PostMapping("orderSearch")
+    public String orderSearch(@RequestParam(name = "userId") Long userId, Model model) {
+        List<Order> orderList = userDAO.getOrders(userId);
+        model.addAttribute("orderList", orderList);
+
+        return "/orders";
     }
 }

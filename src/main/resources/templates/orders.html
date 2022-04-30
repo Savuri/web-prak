@@ -10,6 +10,17 @@
 <div th:replace="lib :: body-header"></div>
 <h2>List of orders:</h2>
 <main class="content">
+    <form method="post" th:action="orderSearch">
+        Search:
+        <div class="input-group">
+            <div class="mb-3">
+                <label for="userIdInput" class="form-label">User id</label>
+                <input name="userId" type="text" style="height: 125px" class="form-control" id="userIdInput" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Search</button>
+    </form>
+
 
     <table class="table">
         <thead>
