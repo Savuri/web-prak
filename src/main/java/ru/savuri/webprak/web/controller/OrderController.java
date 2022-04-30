@@ -129,6 +129,12 @@ public class OrderController {
         for (Good good : goodList) {
             goodDAO.update(good);
         }
+
+        Set<Order> tmptmp = customer.getOrders();
+        tmptmp.add(order);
+        customer.setOrders(tmptmp);
+        userDAO.update(customer);
+
         return String.format("redirect:/orderInfo?orderId=%d", order.getId());
     }
 
