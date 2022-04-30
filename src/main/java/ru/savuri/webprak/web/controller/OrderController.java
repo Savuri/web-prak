@@ -92,8 +92,6 @@ public class OrderController {
 
                 OrderGood orderGood = new OrderGood(order, goodList.get(i), purchaseQuantity.get(i), goodList.get(i).getPrice());
 
-                System.err.println(purchaseQuantity.get(i));
-
                 good.setQuantity(good.getQuantity() - purchaseQuantity.get(i));
 
                 goodsToUpdate.add(good);
@@ -103,6 +101,11 @@ public class OrderController {
                 thisGoodOrders.add(orderGood);
                 good.setOrderGoods(thisGoodOrders);
             }
+        }
+
+        if (orderGoodsToLoad.size() == 0) {
+            model.addAttribute("errorMsg", "Empty basket");
+            return "errorPage";
         }
 
         User customer = userDAO.getById(orderCreationDTO.getCustomerId());
