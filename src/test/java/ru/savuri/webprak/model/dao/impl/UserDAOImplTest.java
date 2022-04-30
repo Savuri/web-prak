@@ -39,7 +39,7 @@ class UserDAOImplTest {
         users.add(new User("Иван Иванович Иванов", "8912341234", "ул. Фушкина г. Эквестрия", "some2@mail.ru"));
         users.add(new User("Рван Иванович Иванов", "9912341234", "ул. Аушкина г. Эквестрия", "some3@mail.ru"));
 
-        orders.add(new Order(new HashSet<>(), users.get(0), Timestamp.valueOf("2023-01-01 10:12:12").toLocalDateTime(), "ул. Пушкина г. Эквестрия", Order.Status.CANCELED));
+        orders.add(new Order(new HashSet<>(), users.get(0), Timestamp.valueOf("2023-01-01 10:12:12").toLocalDateTime(), "ул. Пушкина г. Эквестрия", Order.Status.PROCESSING));
         orders.add(new Order(new HashSet<>(), users.get(0), Timestamp.valueOf("2022-01-01 10:12:12").toLocalDateTime(), "ул. Пушкина г. Эквестрия", Order.Status.DELIVERED));
         orders.add(new Order(new HashSet<>(), users.get(1), Timestamp.valueOf("2021-06-01 10:12:12").toLocalDateTime(), "ул. Пушкина г. Эквестрия", Order.Status.SHIPPED));
 
