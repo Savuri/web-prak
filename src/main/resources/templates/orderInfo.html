@@ -13,11 +13,11 @@
     <div style="font-size : 20px">
         <span th:text="'Id: ' + ${order.getId()}"></span>
         <br>
-        <span th:text="'Assembly place: ' + ${order.getDeliveryTime()}"></span>
+        <span th:text="'Delivery time: ' + ${order.getDeliveryTime()}"></span>
         <br>
-        <span th:text="'Price: ' + ${order.getDeliveryPlace()}"></span>
+        <span th:text="'Delivery place: ' + ${order.getDeliveryPlace()}"></span>
         <br>
-        <span th:text="'Quantity: ' + ${order.getStatus()}"></span>
+        <span th:text="'Status: ' + ${order.getStatus()}"></span>
     </div>
     <br>
 
@@ -25,7 +25,6 @@
         <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Order id</th>
             <th scope="col">Model</th>
             <th scope="col">Type</th>
             <th scope="col">Manufacturer</th>
@@ -44,6 +43,8 @@
         </tr>
         </tbody>
     </table>
+
+    <h2 th:text="'Total purchase sum = ' + ${sum}"></h2>
 
     <form style="display: inline" method="post" action="/orderDelete">
         <input type="hidden" name="orderId" th:value="${order.getId()}"/>

@@ -24,7 +24,7 @@ public class Good implements SuperEntity<Long> {
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "good", fetch = FetchType.EAGER)
     @ToString.Exclude
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Set<OrderGood> orderGoods;
 
     @Column(nullable = false, name = "model", length = 100)

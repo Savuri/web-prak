@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
+
 import lombok.*;
 
 @Entity
@@ -21,7 +22,7 @@ public class Order implements SuperEntity<Long> {
     private Long id = null;
 
     //  Без @NonNull, для простой инициализации, проверки на null ручками, где надо.
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "order")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "order", orphanRemoval = true)
     @ToString.Exclude
     @NonNull
     private Set<OrderGood> orderGoods;

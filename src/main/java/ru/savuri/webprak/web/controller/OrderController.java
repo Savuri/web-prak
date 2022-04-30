@@ -44,6 +44,14 @@ public class OrderController {
         Order order = orderDAO.getById(orderId);
         model.addAttribute("order", order);
 
+        Long sum = 0L;
+
+        for (OrderGood orderGood : order.getOrderGoods()) {
+            sum += orderGood.getPurchasePrice() * orderGood.getPurchaseQuantity();
+        }
+
+        model.addAttribute("sum", sum);
+
         return "orderInfo";
     }
 
@@ -76,7 +84,17 @@ public class OrderController {
         for (int i = 0; i < purchaseQuantity.size(); ++i) {
             if (purchaseQuantity.get(i) > 0) {
                 Good good = goodList.get(i);
+
+                if (purchaseQuantity.get(i) > good.getQuantity()) {
+                    model.addAttribute("errMsg", "Wrong purchase quantity for" + good.getModel() + " " + good.getManufacturer());
+                    return "errorPage";
+                }
+
                 OrderGood orderGood = new OrderGood(order, goodList.get(i), purchaseQuantity.get(i), goodList.get(i).getPrice());
+
+                System.err.println(purchaseQuantity.get(i));
+
+                good.setQuantity(good.getQuantity() - purchaseQuantity.get(i));
 
                 goodsToUpdate.add(good);
                 orderGoodsToLoad.add(orderGood);
@@ -89,7 +107,12 @@ public class OrderController {
 
         User customer = userDAO.getById(orderCreationDTO.getCustomerId());
 
-        Set<OrderGood> tmp = new HashSet<>(orderGoodsToLoad.size());
+        if (customer == null) {
+            model.addAttribute("errorMsg", "This user does not exists");
+            return "errorPage";
+        }
+
+        Set<OrderGood> tmp = new HashSet<>(orderGoodsToLoad);
 
         order.setUser(customer);
         order.setOrderGoods(tmp);
@@ -102,7 +125,6 @@ public class OrderController {
         for (int i = 0; i < goodList.size(); ++i) {
             goodDAO.update(goodList.get(i));
         }
-
         return String.format("redirect:/orderInfo?orderId=%d", order.getId());
     }
 
