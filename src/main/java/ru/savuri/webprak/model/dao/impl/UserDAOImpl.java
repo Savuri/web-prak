@@ -16,6 +16,7 @@ import java.util.List;
 
 @Repository
 public class UserDAOImpl extends SuperDAOImpl<User, Long> implements UserDAO {
+    // Этому коду я таки применение не нашёл. Но пусть останется раз уже оттестирован.
     @Override
     public List<User> getByFullName(String fullName) {
         try (Session session = sessionFactory.openSession()) {
@@ -38,6 +39,4 @@ public class UserDAOImpl extends SuperDAOImpl<User, Long> implements UserDAO {
             return session.createQuery("select u.orders from User u where u.id = :id order by u.id").setParameter("id", id).getResultList();
         }
     }
-
-
 }
