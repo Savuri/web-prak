@@ -47,9 +47,9 @@ insert into users(user_id, address, email, full_name, phone_number) values
 (6, 'г. Москва ул. Лермонтова дом 11 кв 15', 'AntyanEgo@gmail.ru', 'Antyan Ego Vil', '+79123124500');
 
 insert into orders(order_id, delivery_place, delivery_time, status, user_id) values
-(7, 'г. Москва ул. Пушкина дом 22 кв 33', '2020-08-08 04:05:06', 'PROCESSING', 4),
-(8, 'Самовывоз', '2020-01-08 04:05:06', 'DELIVERED', 4),
-(9, 'г. Москва ул. Лермонтова дом 11 кв 15', '2020-09-12 04:05:06', 'SHIPPED', 5);
+(7, 'г. Москва ул. Пушкина дом 22 кв 33', '2020-08-08 04:05:00', 'PROCESSING', 4),
+(8, 'Самовывоз', '2020-01-08 04:05:00', 'DELIVERED', 4),
+(9, 'г. Москва ул. Лермонтова дом 11 кв 15', '2020-09-12 04:05:00', 'SHIPPED', 5);
 
 insert into ordergoods(order_good_id, purchase_price, purchase_quantity, good_id, order_id) values
 (10, 46000, 2, 1, 7),
