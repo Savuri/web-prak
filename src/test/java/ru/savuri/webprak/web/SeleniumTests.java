@@ -3,9 +3,13 @@ package ru.savuri.webprak.web;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -33,7 +37,7 @@ public class SeleniumTests {
     @LocalServerPort
     private int port;
     @Autowired
-    private WebDriver webDriver;
+    private WebDriver driver;
     @Autowired
     private SessionFactory sessionFactory;
     @Autowired
@@ -45,7 +49,22 @@ public class SeleniumTests {
     @Autowired
     private OrderGoodDAO orderGoodDAO;
 
+    private void waitLoad() {
+        new WebDriverWait(driver, 1).until(
+                webDriver -> ((JavascriptExecutor) webDriver)
+                        .executeScript("return document.readyState").equals("complete"));
+    }
+
+    @Test
     void testGoodsContent() {
+        driver.get("http://localhost:" + port + "/");
+        driver.findElement(By.linkText("Goods"));
+        waitLoad();
+        List<WebElement> elements = driver.findElements(By.xpath("//table[@class='autoTable']/tbody/tr//a"));
+
+        for (WebElement element : elements) {
+            System.err.println(element.getText());
+        }
 
     }
 
@@ -152,16 +171,22 @@ public class SeleniumTests {
         orderList.get(1).setOrderGoods(Stream.of(orderGoodList.get(2)).collect(Collectors.toCollection(HashSet::new)));
         orderList.get(2).setOrderGoods(Stream.of(orderGoodList.get(3)).collect(Collectors.toCollection(HashSet::new)));
 
-        userList.get(0).setOrders(Stream.of(orderList.get(0), orderList.get(1)).collect(Collectors.toCollection(HashSet::new)));
-        userList.get(1).setOrders(Stream.of(orderList.get(2)).collect(Collectors.toCollection(HashSet::new)));
-        userList.get(2).setOrders(new HashSet<>());
 
         goodList.get(0).setOrderGoods(Stream.of(orderGoodList.get(0), orderGoodList.get(3)).collect(Collectors.toCollection(HashSet::new)));
         goodList.get(1).setOrderGoods(Stream.of(orderGoodList.get(1)).collect(Collectors.toCollection(HashSet::new)));
         goodList.get(2).setOrderGoods(Stream.of(orderGoodList.get(2)).collect(Collectors.toCollection(HashSet::new)));
 
-        orderDAO.saveCollection(orderList); // save orderGood too
         userDAO.saveCollection(userList);
+
+        userList.get(0).setOrders(Stream.of(orderList.get(0), orderList.get(1)).collect(Collectors.toCollection(HashSet::new)));
+        userList.get(1).setOrders(Stream.of(orderList.get(2)).collect(Collectors.toCollection(HashSet::new)));
+        userList.get(2).setOrders(new HashSet<>());
+
+        orderDAO.saveCollection(orderList);
+
+        for (User user : userList) {
+            userDAO.update(user);
+        }
 
         for (Good good : goodList) {
             goodDAO.update(good);
