@@ -50,7 +50,7 @@
     <h2 th:text="'Total purchase sum = ' + ${sum}"></h2>
 
     <form style="display: inline" method="post" action="/orderDelete">
-        <input type="hidden" name="orderId" th:value="${order.getId()}"/>
+        <input type="hidden" name="orderId" th:value="${order.getId()}" required/>
         <button type="submit" class="btn btn-primary btn-lg">Delete order</button>
     </form>
 </main>

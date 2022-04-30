@@ -22,7 +22,7 @@
         </div>
         <br>
         <form style="display: inline" method="post" action="/userDelete">
-            <input type="hidden" name="userId" th:value="${thisUser.getId()}"/>
+            <input type="hidden" name="userId" th:value="${thisUser.getId()}" required/>
             <button type="submit" class="btn btn-primary btn-lg">Delete user</button>
         </form>
         <a th:href="@{/userEdit(userId=${thisUser.getId()})}">

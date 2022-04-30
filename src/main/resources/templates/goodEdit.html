@@ -13,47 +13,47 @@
     <h2 th:if="${!isEditGood}">Create new good.</h2>
 
     <form method="post" th:action="goodSave">
-        <input type="hidden" name="goodId" th:value="${good?.getId()}"/>
+        <input type="hidden" name="goodId" th:value="${good?.getId()}" required/>
         <div class="mb-3">
             <label for="modelInput" class="form-label">Model</label>
-            <input name="model" type="text" class="form-control" id="modelInput" th:value="${good?.getModel()}">
+            <input name="model" type="text" class="form-control" id="modelInput" th:value="${good?.getModel()}" required>
         </div>
         <div class="mb-3">
             <label for="manufacturerInput" class="form-label">Manufacturer</label>
-            <input name="manufacturer" type="text" class="form-control" id="manufacturerInput" th:value="${good?.getManufacturer()}">
+            <input name="manufacturer" type="text" class="form-control" id="manufacturerInput" th:value="${good?.getManufacturer()}" required>
         </div>
         <div class="mb-3">
             <label for="assemblyPlace" class="form-label">Assembly place</label>
-            <input name="assemblyPlace" type="text" class="form-control" id="assemblyPlace" th:value="${good?.getAssemblyPlace()}">
+            <input name="assemblyPlace" type="text" class="form-control" id="assemblyPlace" th:value="${good?.getAssemblyPlace()}" required>
         </div>
         <div class="mb-3">
             <label for="priceInput" class="form-label">Price</label>
-            <input name="price" type="number" min="0" class="form-control" id="priceInput" th:value="${good?.getPrice()}">
+            <input name="price" type="number" min="0" class="form-control" id="priceInput" th:value="${good?.getPrice()}" required>
         </div>
         <div class="mb-3">
             <label for="quantityInput" class="form-label">Quantity</label>
-            <input name="quantity" type="number" min="0" class="form-control" id="quantityInput" th:value="${good?.getQuantity()}">
+            <input name="quantity" type="number" min="0" class="form-control" id="quantityInput" th:value="${good?.getQuantity()}" required>
         </div>
         Type:
         <div class="mb-3" style="">
-            <input type="radio" class="form-check-input" name="typeInput" id="typeInput1" th:checked="${good?.getType()?.getName()} == Kitchen" value="KITCHEN">
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput1" th:checked="${good?.getType()?.getName()} == Kitchen" value="KITCHEN" required>
             <label for="typeInput1" class="form-label">Kitchen</label>
             <br>
-            <input type="radio" class="form-check-input" name="typeInput" id="typeInput2" th:checked="${good?.getType()?.getName()} == Bathroom" value="BATHROOM">
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput2" th:checked="${good?.getType()?.getName()} == Bathroom" value="BATHROOM" required>
             <label for="typeInput2">Bathroom</label>
             <br>
-            <input type="radio" class="form-check-input" name="typeInput" id="typeInput3" th:checked="${good?.getType()?.getName()} == TV" value="TV">
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput3" th:checked="${good?.getType()?.getName()} == TV" value="TV" required>
             <label for="typeInput3">TV</label>
             <br>
-            <input type="radio" class="form-check-input" name="typeInput" id="typeInput4" th:checked="${good?.getType()?.getName()} == Computer" value="COMPUTER">
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput4" th:checked="${good?.getType()?.getName()} == Computer" value="COMPUTER" required>
             <label for="typeInput4">Computer</label>
             <br>
-            <input type="radio" class="form-check-input" name="typeInput" id="typeInput5" th:checked="${good?.getType()?.getName()} == Other" value="OTHER">
+            <input type="radio" class="form-check-input" name="typeInput" id="typeInput5" th:checked="${good?.getType()?.getName()} == Other" value="OTHER" required>
             <label for="typeInput5">Other</label>
         </div>
         <div>
             <label for="inputDescription" class="form-label">Description</label>
-            <textarea name="description" class="form-control" id="inputDescription" style="height: 420px" th:text="${good?.getDescription()}"></textarea>
+            <textarea name="description" class="form-control" id="inputDescription" style="height: 420px" th:text="${good?.getDescription()}" required></textarea>
         </div>
         <a th:href="@{goods}"><button type="button" class="btn btn-primary btn-lg">Cancel</button></a>
         <button type="submit" class="btn btn-primary btn-lg">Save</button>
