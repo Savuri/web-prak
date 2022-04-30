@@ -18,6 +18,9 @@
         <span th:text="'Delivery place: ' + ${order.getDeliveryPlace()}"></span>
         <br>
         <span th:text="'Status: ' + ${order.getStatus()}"></span>
+        <br>
+        <span>Customer: </span>
+        <a th:href="@{/userInfo(userId=${order.getUser().getId()})}" th:text="${order.getUser().getFullName()}"></a>
     </div>
     <br>
 
