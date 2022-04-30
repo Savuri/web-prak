@@ -11,7 +11,7 @@
 <body>
 <div th:replace="lib :: body-header"></div>
 <h2>Error have happened </h2>
-<span th:text="'Error msg: ' + ${errorMsg}"></span>
+<span id="errorMsg" th:text="'Error msg: ' + ${errorMsg}"></span>
 
 <div th:replace="lib :: bs-site-script"></div>
 

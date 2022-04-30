@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class WebDriverConfiguration {
     @Bean
     public WebDriver webDriver() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
-        System.setProperty("webdriver.firefox.driver", "geckodriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.firefox.driver", "/usr/bin/geckodriver");
 
         FirefoxOptions options = new FirefoxOptions();
         options.setHeadless(false);
