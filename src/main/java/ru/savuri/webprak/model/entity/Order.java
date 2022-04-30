@@ -64,8 +64,7 @@ public class Order implements SuperEntity<Long> {
     public enum Status {
         PROCESSING("В обработке"),
         SHIPPED("Доставляется"),
-        DELIVERED("Доставлен"),
-        CANCELED("Отменён");
+        DELIVERED("Доставлен");
 
         private final String status;
 
