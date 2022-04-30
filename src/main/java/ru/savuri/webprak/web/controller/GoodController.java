@@ -91,8 +91,13 @@ public class GoodController {
     }
 
     @PostMapping("/goodDelete")
-    public String goodDelete(@RequestParam(name = "goodId") Long goodId) {
-        goodDAO.delete(goodDAO.getById(goodId));
+    public String goodDelete(@RequestParam(name = "goodId") Long goodId, Model model) {
+        try {
+            goodDAO.delete(goodDAO.getById(goodId));
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            model.addAttribute("errorMsg", "This good can not be deleted because exist order which contain this good.");
+            return "errorPage";
+        }
 
         return "redirect:/goods";
     }
