@@ -38,7 +38,7 @@
             <tr th:each="good, itemStat : ${goodList}">
                 <th scope="col">
                     <div class="mb-3">
-                      <input th:field="*{purchaseQuantity[__${itemStat.index}__]}" style="width: 200px" min="0" required>
+                      <input th:id="'QuantityId' + ${good.getId()}" th:field="*{purchaseQuantity[__${itemStat.index}__]}" style="width: 200px" min="0" required>
                     </div>
                 </th>
                 <th scope="row"></th>

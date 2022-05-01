@@ -10,7 +10,7 @@
 <div th:replace="lib :: body-header"></div>
 
 <main class="content">
-    <div style="font-size : 20px">
+    <div id="divId" style="font-size : 20px">
         <span th:text="'Name: ' + ${thisGood.getManufacturer()} + ' ' + ${thisGood.getModel()}"></span>
         <br>
         <span th:text="'Assembly place: ' + ${thisGood.getAssemblyPlace()}"></span>
