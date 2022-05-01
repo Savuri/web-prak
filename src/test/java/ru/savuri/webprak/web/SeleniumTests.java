@@ -424,6 +424,15 @@ public class SeleniumTests {
         waitLoad();
         elements = driver.findElements(By.xpath("//table[@class='table']/tbody/tr"));
         assertEquals(2, elements.size());
+        // empty search
+        // all search
+        driver.findElement(By.linkText("Orders")).click();
+        waitLoad();
+        driver.findElement(By.id("userIdInput")).clear();
+        driver.findElement(By.xpath("/html/body/main/form/button")).click();
+        waitLoad();
+        elements = driver.findElements(By.xpath("//table[@class='table']/tbody/tr"));
+        assertEquals(3, elements.size());
     }
 
     @Test
