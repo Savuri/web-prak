@@ -147,8 +147,13 @@ public class OrderController {
 
     @PostMapping("orderSearch")
     public String orderSearch(@RequestParam(name = "userId", required = false) Long userId, Model model) {
-        List<Order> orderList = userDAO.getOrders(userId);
-        model.addAttribute("orderList", orderList);
+        if (userId != null) {
+            List<Order> orderList = userDAO.getOrders(userId);
+            model.addAttribute("orderList", orderList);
+        } else {
+            List<Order> orderList = orderDAO.getAll();
+            model.addAttribute("orderList", orderList);
+        }
 
         return "/orders";
     }
