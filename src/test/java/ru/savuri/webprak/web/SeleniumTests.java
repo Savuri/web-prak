@@ -314,6 +314,22 @@ public class SeleniumTests {
         Order expectedOrder = new Order(new HashSet<>(), user, LocalDateTime.parse("2020-08-08 11:05:00", formatter), "г. Москва ул. Пушкина дом 22 кв 33", Order.Status.PROCESSING);
         Good expectedGood = goodDAO.getAll().get(0);
 
+        // not sufficient of material
+        driver.findElement(By.id("customerIdInput")).sendKeys("123123");
+        driver.findElement(By.id("deliveryDateInput")).sendKeys(String.valueOf(dateString));
+        driver.findElement(By.id("deliveryPlaceInput")).sendKeys(expectedOrder.getDeliveryPlace());
+        driver.findElement(By.id("QuantityId" + String.valueOf(expectedGood.getId()))).sendKeys("12312312");
+        driver.findElement(By.xpath("/html/body/main/form/button")).submit();
+        waitLoad();
+        Thread.sleep(300);
+        waitLoad();
+        WebElement element = driver.findElement(By.id("errorMsg"));
+        assertEquals("Error msg: Wrong purchase quantity for GA-B379SQUL LG", element.getText());
+        //
+        driver.findElement(By.linkText("Orders")).click();
+        waitLoad();
+        driver.findElement(By.linkText("Create order")).click();
+        waitLoad();
         //empty basket
         driver.findElement(By.id("customerIdInput")).sendKeys(String.valueOf(expectedOrder.getUser().getId()));
         driver.findElement(By.id("deliveryDateInput")).sendKeys(String.valueOf(dateString));
@@ -322,7 +338,7 @@ public class SeleniumTests {
         driver.findElement(By.xpath("/html/body/main/form/button")).submit();
         waitLoad();
         Thread.sleep(300);
-        WebElement element = driver.findElement(By.id("errorMsg"));
+        element = driver.findElement(By.id("errorMsg"));
         assertEquals("Error msg: Empty basket", element.getText());
 
         driver.findElement(By.linkText("Orders")).click();

@@ -87,7 +87,7 @@ public class OrderController {
                 Good good = goodList.get(i);
 
                 if (purchaseQuantity.get(i) > good.getQuantity()) {
-                    model.addAttribute("errMsg", "Wrong purchase quantity for" + good.getModel() + " " + good.getManufacturer());
+                    model.addAttribute("errorMsg", "Wrong purchase quantity for " + good.getModel() + " " + good.getManufacturer());
                     return "errorPage";
                 }
 
